@@ -1,14 +1,14 @@
 <main class="vitrine">
-  <div class="vinil-card" *ngFor="let vinil of vinis" (click)="irParaDetalhes(vinil.id)">
-    <div class="vinil-imagem">
-      <img [src]="'assets/vinis/' + vinil.id + '.jpg'" [alt]="vinil.album" />
+    <div class="vinil-card" *ngFor="let vinil of vinis" (click)="irParaDetalhes(vinil.id)">
+        <div class="vinil-imagem">
+            <img [src]="'assets/vinis/' + vinil.id + '.jpg'" [alt]="vinil.album" />
+        </div>
+        <div class="vinil-info">
+            <strong>{{ vinil.album }}</strong><br />
+            {{ vinil.artista }}<br />
+            {{ vinil.ano }}<br />
+            Gravadora: {{ vinil.gravadora }}<br />
+            R$ {{ vinil.preco | number:'1.2-2' }}
+        </div>
     </div>
-    <div class="vinil-info">
-      <strong>{{ vinil.album }}</strong><br />
-      {{ vinil.artista }}<br />
-      {{ vinil.ano }}<br />
-      Gravadora: {{ vinil.gravadora }}<br />
-      R$ {{ vinil.preco | number:'1.2-2' }}
-    </div>
-  </div>
 </main>
