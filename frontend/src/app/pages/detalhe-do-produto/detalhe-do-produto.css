@@ -1,3 +1,15 @@
+.detalhe {
+  background-color: #8dadff;
+  min-height: 100vh;
+  padding: 30px 1rem 2rem; /* considerando header fixo */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  box-sizing: border-box;
+  width: 100vw;
+  margin: 0 auto; /* centraliza */
+}
+
 .detalhe-container {
   background-color: #f9dc9f;
   margin: 140px auto 2rem;
@@ -7,7 +19,6 @@
   gap: 2rem;
   max-width: 1000px;
   box-shadow: 0 0 12px rgba(0,0,0,0.1);
-  border-radius: 8px;
 }
 
 .imagem-vinil {
@@ -15,7 +26,6 @@
   height: 300px;
   background-color: white;
   overflow: hidden;
-  border-radius: 6px;
 }
 
 .imagem-vinil img {
@@ -27,7 +37,6 @@
 .info-vinil {
   background-color: white;
   padding: 1.5rem;
-  border-radius: 6px;
   flex: 1;
   display: flex;
   flex-direction: column;
