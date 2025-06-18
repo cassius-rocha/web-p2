@@ -1,0 +1,45 @@
+.busca-container {
+  padding: 140px 2rem 2rem;
+  background-color: #85e58a;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.resultados {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.vinil-card {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 280px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.vinil-card:hover {
+  transform: scale(1.02);
+}
+
+.vinil-imagem {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #ddd;
+}
+
+.vinil-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vinil-info {
+  padding: 1rem;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,18 @@
+<main class="busca-container">
+  <h2>Resultados da busca:</h2>
+
+  <div class="resultados">
+    <div *ngFor="let vinil of resultados" class="vinil-card" (click)="irParaDetalhes(vinil.id)">
+      <div class="vinil-imagem">
+        <img [src]="'assets/vinis/' + vinil.id + '.jpg'" [alt]="vinil.album" />
+      </div>
+      <div class="vinil-info">
+        <strong>{{ vinil.album }}</strong><br />
+        {{ vinil.artista }}<br />
+        {{ vinil.ano }}<br />
+        Gravadora: {{ vinil.gravadora }}<br />
+        R$ {{ vinil.preco | number:'1.2-2' }}
+      </div>
+    </div>
+  </div>
+</main>
