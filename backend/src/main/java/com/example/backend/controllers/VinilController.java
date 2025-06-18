@@ -73,4 +73,12 @@ public class VinilController {
         List<Vinil> vinis = vinilRepository.findAllByGravadora(gravadora);
         return validateListNotEmpty(vinis, "Nenhum vinil encontrado com essa gravadora.");
     }
+
+    @GetMapping("/buscar")
+    public List<Vinil> buscarPorTermo(@RequestParam String termo) {
+        String termoNormalizado = termo.toLowerCase();
+        List<Vinil> vinis = vinilRepository.buscarPorTermo(termoNormalizado);
+        return validateListNotEmpty(vinis, "Nenhum vinil encontrado com esse termo.");
+    }
+
 }
