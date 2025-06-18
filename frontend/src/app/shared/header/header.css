@@ -98,3 +98,12 @@
 .parallelogram-button.cesta {
   background-color: #85e58a;
 }
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transform: skew(-20deg); /* desentorta a lupa */
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+}

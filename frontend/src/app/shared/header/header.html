@@ -9,6 +9,9 @@
         <div class="search-parallelogram">
             <input type="text" [(ngModel)]="termoBusca" (keydown.enter)="buscarProdutos()"
                 placeholder="Busque o seu disco!" />
+            <button class="icon-button" (click)="buscarProdutos()">
+                <i class="bi bi-search"></i>
+            </button>
         </div>
     </div>
 
