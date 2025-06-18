@@ -1,0 +1,16 @@
+.parallelogram-button {
+  transform: skew(20deg);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #8dadff;
+  margin-top: 0.5rem;
+}
+
+.parallelogram-button span {
+  transform: skew(-20deg);
+  display: inline-block;
+}

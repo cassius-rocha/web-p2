@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { BotaoAdicionarCestaComponent } from '../../shared/botao-adicionar-cesta/botao-adicionar-cesta.component';
 
 @Component({
   selector: 'app-vitrine',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BotaoAdicionarCestaComponent],
   templateUrl: './vitrine.html',
   styleUrls: ['./vitrine.css']
 })

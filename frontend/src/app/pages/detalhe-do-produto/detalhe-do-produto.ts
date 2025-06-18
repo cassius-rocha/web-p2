@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { BotaoAdicionarCestaComponent } from '../../shared/botao-adicionar-cesta/botao-adicionar-cesta.component';
 
 @Component({
   selector: 'app-detalhe-do-produto',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BotaoAdicionarCestaComponent],
   templateUrl: './detalhe-do-produto.html',
   styleUrls: ['./detalhe-do-produto.css']
 })

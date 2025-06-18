@@ -12,6 +12,10 @@
         {{ vinil.ano }}<br />
         Gravadora: {{ vinil.gravadora }}<br />
         R$ {{ vinil.preco | number:'1.2-2' }}
+        <br />
+        <!-- botão de adicionar -->
+        <app-botao-adicionar-cesta [produto]="vinil" (click)="$event.stopPropagation()">          
+        </app-botao-adicionar-cesta>
       </div>
     </div>
   </div>

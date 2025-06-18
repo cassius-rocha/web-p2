@@ -1,0 +1,47 @@
+<!-- cesta.component.html -->
+<main class="cesta-container">
+  <h2>Minha cesta</h2>
+
+  <div *ngIf="cestaService.itens.length; else vazio" class="tabela">
+    <div class="cabecalho">
+      <div class="coluna-item">Item</div>
+      <div class="coluna-quantidade">Quantidade</div>
+      <div class="coluna-valor">Valor</div>
+    </div>
+
+    <div *ngFor="let item of cestaService.itens" class="linha">
+      <div class="coluna-item">
+        <strong>{{ item.produto.album }}</strong><br />
+        {{ item.produto.artista }}<br />
+        {{ item.produto.ano }}<br />
+        Gravadora: {{ item.produto.gravadora }}<br />
+        Gênero: {{ item.produto.genero }}<br />
+        Preço unitário: R$ {{ item.produto.preco | number:'1.2-2' }}
+      </div>
+      <div class="coluna-quantidade">{{ item.quantidade }}</div>
+      <div class="coluna-valor">
+        R$ {{ item.produto.preco * item.quantidade | number:'1.2-2' }}
+      </div>
+    </div>
+
+    <div class="total">
+      <span>Total:</span>
+      <strong>R$ {{ calcularTotal() | number:'1.2-2' }}</strong>
+    </div>
+
+    <div class="botoes">
+      <button class="parallelogram-button limpar" (click)="limparCesta()">
+        <span>Limpar cesta</span>
+      </button>
+      <button class="parallelogram-button pagar">
+        <span>Ir para o pagamento</span>
+      </button>
+    </div>
+  </div>
+
+  <ng-template #vazio>
+    <div class="cesta-vazia">
+      Você ainda não escolheu nenhum disco!
+    </div>
+  </ng-template>
+</main>

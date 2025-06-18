@@ -12,6 +12,8 @@
       <p><strong>Gênero:</strong> {{ vinil.genero }}</p>
       <p><strong>Preço:</strong> R$ {{ vinil.preco | number: '1.2-2' }}</p>
       <p><strong>Descrição:</strong> {{ vinil.descricao }}</p>
+      <app-botao-adicionar-cesta [produto]="vinil"></app-botao-adicionar-cesta>
+
     </div>
   </div>
 </main>
