@@ -1,0 +1,100 @@
+.header {
+  background-color: #f9dc9f;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0; /* sem espaçamento */
+  box-sizing: border-box;
+}
+
+.header-left {
+  width: 150px; /* espaço fixo para a logo */
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente a logo */
+  align-items: center; /* centraliza verticalmente */
+}
+
+.logo-placeholder {
+  width: 120px;
+  height: 50px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transform: none;
+}
+
+.header-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* centraliza a busca */
+}
+
+.search-parallelogram {
+  background-color: white;
+  transform: skew(20deg);
+  padding: 0.5rem 1rem;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  width: 500px;
+}
+
+.search-parallelogram input {
+  transform: skew(-20deg);
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3rem;
+  text-align: center;
+  background: transparent;
+  color: #333;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+  width: 420px; /* largura total para os 3 botões */
+}
+
+.parallelogram-button {
+  flex-grow: 1 1 0; /* faz cada botão ocupar espaço igual */
+  min-width: 80px;
+  transform: skew(20deg);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallelogram-button span {
+  transform: skew(-20deg);
+  display: inline-block;
+}
+
+.parallelogram-button i {
+  transform: skew(-20deg);
+  font-size: 1.2rem;
+}
+
+.parallelogram-button.login,
+.parallelogram-button.cadastro {
+  background-color: #8dadff;
+}
+
+.parallelogram-button.cesta {
+  background-color: #85e58a;
+}
