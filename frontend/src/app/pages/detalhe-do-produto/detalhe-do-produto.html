@@ -1,0 +1,15 @@
+<div class="detalhe-container" *ngIf="vinil">
+  <div class="imagem-vinil">
+    <img [src]="'assets/vinis/' + vinil.id + '.jpg'" [alt]="vinil.album" />
+  </div>
+
+  <div class="info-vinil">
+    <h2>{{ vinil.album }}</h2>
+    <p><strong>Artista:</strong> {{ vinil.artista }}</p>
+    <p><strong>Ano:</strong> {{ vinil.ano }}</p>
+    <p><strong>Gravadora:</strong> {{ vinil.gravadora }}</p>
+    <p><strong>Gênero:</strong> {{ vinil.genero }}</p>
+    <p><strong>Preço:</strong> R$ {{ vinil.preco | number: '1.2-2' }}</p>
+    <p><strong>Descrição:</strong> {{ vinil.descricao }}</p>
+  </div>
+</div>
