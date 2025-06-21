@@ -2,6 +2,7 @@ package com.example.backend.models;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +25,19 @@ public class Pedido {
 
     private BigDecimal total;
 
+    private LocalDate previsaoEntrega;
+
     public Pedido() {
     }
 
     public Pedido(Long id, Cliente cliente, LocalDateTime dataCriacao,
-                  List<ItemPedido> itens, BigDecimal total) {
+                  List<ItemPedido> itens, BigDecimal total, LocalDate previsaoEntrega) {
         this.id = id;
         this.cliente = cliente;
         this.dataCriacao = dataCriacao;
         this.itens = itens;
         this.total = total;
+        this.previsaoEntrega = previsaoEntrega;
     }
 
     public Long getId() { 
@@ -74,5 +78,13 @@ public class Pedido {
     
     public void setTotal(BigDecimal total) { 
         this.total = total; 
+    }
+
+    public LocalDate getPrevisaoEntrega() { 
+        return previsaoEntrega; 
+    }
+    
+    public void setPrevisaoEntrega(LocalDate previsaoEntrega) { 
+        this.previsaoEntrega = previsaoEntrega; 
     }
 }

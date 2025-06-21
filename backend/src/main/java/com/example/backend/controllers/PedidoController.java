@@ -40,6 +40,10 @@ public class PedidoController {
             pedido.setDataCriacao(LocalDateTime.now());
         }
 
+        if (pedido.getPrevisaoEntrega() == null) {
+            pedido.setPrevisaoEntrega(pedido.getDataCriacao().toLocalDate().plusDays(7));
+        }
+
         // Calcula total se não fornecido
         if (pedido.getTotal() == null) {
             BigDecimal total = pedido.getItens().stream()
