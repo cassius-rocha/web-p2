@@ -18,14 +18,18 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String senha;
+
     public Cliente() {
     }
 
-    public Cliente(Long id, String cpf, String nome, String email) {
+    public Cliente(Long id, String cpf, String nome, String email, String senha) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
+        this.senha = senha;
     }
 
     public Long getId() { 
@@ -58,5 +62,13 @@ public class Cliente {
     
     public void setEmail(String email) { 
         this.email = email; 
+    }
+
+    public String getSenha() {
+        return senha; 
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
