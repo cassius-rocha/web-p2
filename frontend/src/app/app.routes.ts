@@ -15,5 +15,7 @@ export const routes: Routes = [
     {
         path: 'resultado',
         component: BuscaComponent
-    }
+    },
+    { path: 'cesta', loadComponent: () => import('./pages/cesta/cesta').then(m => m.CestaComponent) },
+
 ];

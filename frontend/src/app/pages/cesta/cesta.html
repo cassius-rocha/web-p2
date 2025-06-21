@@ -11,11 +11,15 @@
 
     <div *ngFor="let item of cestaService.itens" class="linha">
       <div class="coluna-item">
+        <div class="vinil-imagem">
+          <img class="vinil-cesta-img" [src]="'assets/vinis/' + item.produto.id + '.jpg'" [alt]="item.produto.album" />
+        </div>
         <strong>{{ item.produto.album }}</strong><br />
         {{ item.produto.artista }}<br />
         {{ item.produto.ano }}<br />
         Gravadora: {{ item.produto.gravadora }}<br />
         Gênero: {{ item.produto.genero }}<br />
+        Descrição: {{ item.produto.descricao }}<br />
         Preço unitário: R$ {{ item.produto.preco | number:'1.2-2' }}
       </div>
       <div class="coluna-quantidade">{{ item.quantidade }}</div>

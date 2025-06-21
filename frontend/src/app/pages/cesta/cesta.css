@@ -66,11 +66,20 @@ h2 {
 }
 
 .parallelogram-button.pagar {
-  background-color: #81c784;
+  background-color: #85e58a;
 }
 
 .cesta-vazia {
   text-align: center;
   font-size: 1.4rem;
   margin-top: 4rem;
+}
+
+.vinil-cesta-img {
+  width: 100px;           /* tamanho fixo ideal para miniatura */
+  height: auto;
+  display: block;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;     /* opcional, para suavizar a borda */
+  object-fit: cover;      /* mantém proporção, sem distorção */
 }

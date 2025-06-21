@@ -42,4 +42,8 @@
 .vinil-info {
   padding: 1rem;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* <-- centraliza horizontalmente */
+  gap: 0.8rem;
 }

@@ -10,10 +10,13 @@ import { Vinil } from '../../models/vinil';
 })
 export class BotaoAdicionarCestaComponent {
   @Input() produto!: Vinil;
+  foiAdicionado = false;
 
   constructor(private cestaService: CestaService) {}
 
   adicionar() {
     this.cestaService.adicionarProduto(this.produto);
+    this.foiAdicionado = true;
+    setTimeout(() => this.foiAdicionado = false, 1500); // reseta após 1,5s
   }
 }

@@ -40,8 +40,12 @@
 
 .vinil-info {
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem;
   background-color: #f4f4f4;
   font-size: 0.9rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* <-- centraliza horizontalmente */
+  gap: 0.8rem; 
 }

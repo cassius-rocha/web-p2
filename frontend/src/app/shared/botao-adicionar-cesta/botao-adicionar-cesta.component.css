@@ -1,16 +1,34 @@
-.parallelogram-button {
+.adicionar {
   transform: skew(20deg);
   border: none;
   color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.2rem;
   font-weight: bold;
   font-size: 0.9rem;
   cursor: pointer;
-  background-color: #8dadff;
-  margin-top: 0.5rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #85e58a; /* cor igual à do botão "cesta" */
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.parallelogram-button span {
+/* Conteúdo interno desentortado */
+.adicionar span {
   transform: skew(-20deg);
   display: inline-block;
+}
+
+/* Quando for clicado e já estiver adicionado */
+.adicionar.adicionado {
+  background-color: #85e58a; /* mesma cor, mas pode escurecer se quiser */
+  color: white;
+  cursor: default;
+}
+
+/* Efeito de hover */
+.adicionar:hover {
+  background-color: #74d07b;
+  transform: scale(1.05) skew(20deg); /* mantém o skew no hover */
 }

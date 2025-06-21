@@ -1,3 +1,7 @@
-<button class="parallelogram-button adicionar" (click)="adicionar()">
-  <span>Adicionar à cesta</span>
+<button 
+  class="parallelogram-button adicionar"
+  [class.adicionado]="foiAdicionado"
+  (click)="adicionar()"
+  [disabled]="foiAdicionado">
+  <span>{{ foiAdicionado ? 'Adicionado!' : 'Adicionar à cesta' }}</span>
 </button>
