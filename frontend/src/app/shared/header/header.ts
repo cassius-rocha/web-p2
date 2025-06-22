@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
 export class HeaderComponent {
   termoBusca: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   buscarProdutos() {
     const termo = this.termoBusca.trim();
@@ -32,4 +33,14 @@ export class HeaderComponent {
   goToCesta() {
     this.router.navigate(['/cesta']);
   }
+
+  isLogado(): boolean {
+    return !!localStorage.getItem('usuarioLogado');
+  }
+
+  logout() {
+    localStorage.removeItem('usuarioLogado');
+    this.router.navigate(['/']);
+  }
+
 }

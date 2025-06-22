@@ -99,6 +99,10 @@
   background-color: #85e58a;
 }
 
+.parallelogram-button.logout {
+  background-color: #e57373;
+}
+
 .icon-button {
   background: none;
   border: none;

@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="cadastro-wrapper">
+  <div class="cadastro-box">
+    <form (ngSubmit)="login()" class="formulario-cadastro" novalidate>
+      <input
+        class="parallelogram-input"
+        type="email"
+        placeholder="E-mail"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+      <input
+        class="parallelogram-input"
+        type="password"
+        placeholder="Senha"
+        [(ngModel)]="senha"
+        name="senha"
+        required
+      />
+
+      <button type="submit" class="parallelogram-button cadastrar">
+        <span>Login</span>
+      </button>
+      <button type="button" class="parallelogram-button cadastrar" (click)="redefinirSenha()">
+        <span>Esqueci minha senha</span>
+      </button>
+    </form>
+
+    <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
+  </div>
+</div>

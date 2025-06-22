@@ -14,12 +14,18 @@ import { BotaoAdicionarCestaComponent } from '../../shared/botao-adicionar-cesta
 export class VitrineComponent implements OnInit {
   vinis: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (usuarioLogado) {
+      const cliente = JSON.parse(usuarioLogado);
+      console.log('Usuário logado:', cliente.nome); // ou usar como quiser
+    }
+
     this.http.get<any[]>('http://localhost:8080/vinil')
       .subscribe(data => {
-        this.vinis = data.slice(0, 9); // pega os 9 primeiros
+        this.vinis = data.slice(0, 9);
       });
   }
 

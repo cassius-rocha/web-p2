@@ -37,10 +37,14 @@
       <button class="parallelogram-button limpar" (click)="limparCesta()">
         <span>Limpar cesta</span>
       </button>
-      <button class="parallelogram-button pagar">
-        <span>Ir para o pagamento</span>
+      <button class="parallelogram-button pagar" (click)="gravarPedido()">
+        <span>Gravar pedido</span>
       </button>
     </div>
+
+    <app-pedido-popup *ngIf="mostrarPopup" [pedido]="pedidoGerado" (fechar)="fecharPopup()">
+    </app-pedido-popup>
+
   </div>
 
   <ng-template #vazio>

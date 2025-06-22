@@ -25,5 +25,9 @@
         <button class="parallelogram-button cesta" (click)="goToCesta()">
             <i class="bi bi-cart"></i>
         </button>
+        <button *ngIf="isLogado()" class="parallelogram-button logout" (click)="logout()">
+            <span>Logout</span>
+        </button>
     </div>
+
 </header>

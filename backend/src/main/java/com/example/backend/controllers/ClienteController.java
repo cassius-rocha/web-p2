@@ -30,36 +30,24 @@ public class ClienteController {
         if (optionalCliente.isPresent()) {
             Cliente cliente = optionalCliente.get();
 
+            // Verifica a senha com o encoder
             if (passwordEncoder.matches(login.getSenha(), cliente.getSenha())) {
                 return ResponseEntity.ok(cliente);
             }
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha inválidos");
-    }    
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha inválidos.");
+    }
 
-    @PostMapping("/redefinir-senha")
-    public ResponseEntity<?> redefinirSenha(@RequestBody EmailRequest request) {
+    @PostMapping(value = "/redefinir-senha", produces = "text/plain")
+    public ResponseEntity<String> redefinirSenha(@RequestBody EmailRequest request) {
         Optional<Cliente> optionalCliente = clienteRepository.findByEmail(request.getEmail());
 
         if (optionalCliente.isPresent()) {
-            Cliente cliente = optionalCliente.get();
-
-            // Gera uma nova senha temporária (pode ser aleatória ou fixa para testes)
-            String novaSenha = ClienteService.gerarSenhaTemporaria();
-
-            // Criptografa a nova senha
-            String senhaCriptografada = passwordEncoder.encode(novaSenha);
-
-            // Atualiza a senha no banco
-            cliente.setSenha(senhaCriptografada);
-            clienteRepository.save(cliente);
-
-            // Simula o envio da nova senha por e-mail
-            return ResponseEntity.ok("Nova senha temporária enviada para o e-mail: " + request.getEmail());
+            return ResponseEntity.ok("Acesse seu e-mail para redefinir sua senha.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("E-mail não encontrado");
+                    .body("E-mail não cadastrado.");
         }
     }
 
@@ -74,14 +62,35 @@ public class ClienteController {
     public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
         return cliente.map(ResponseEntity::ok)
-                      .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // POST /api/clientes - criar novo cliente
     @PostMapping
-    public Cliente createCliente(@RequestBody Cliente cliente) {
-        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
-        return clienteRepository.save(cliente);
+    public ResponseEntity<?> createCliente(@RequestBody Cliente cliente) {
+        try {
+            if (cliente.getSenha() == null || cliente.getSenha().isBlank()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Senha não pode estar vazia.");
+            }
+
+            cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
+            Cliente savedCliente = clienteRepository.save(cliente);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCliente);
+
+        } catch (Exception ex) {
+            String message = ex.getMessage();
+
+            if (message.contains("cpf")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("cpf já cadastrado, vá para a página de login.");
+            } else if (message.contains("email")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("email já cadastrado, vá para a página de login.");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Erro ao cadastrar cliente.");
+            }
+        }
     }
 
     // PUT /api/clientes/{id} - atualizar cliente

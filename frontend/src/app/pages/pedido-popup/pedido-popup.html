@@ -1,0 +1,22 @@
+<div class="pedido-popup-overlay">
+  <div class="pedido-popup">
+    <button class="fechar" (click)="fecharPopup()">×</button>
+    <h2>Pedido Gravado!</h2>
+    <p><strong>ID:</strong> {{ pedido?.id }}</p>
+    <p><strong>Cliente:</strong> {{ pedido?.cliente?.nome }}</p>
+    <p><strong>Data:</strong> {{ pedido?.dataCriacao | date:'short' }}</p>
+    <p><strong>Total:</strong> R$ {{ pedido?.total | number:'1.2-2' }}</p>
+    <p><strong>Entrega prevista:</strong> {{ pedido?.previsaoEntrega | date }}</p>
+
+    <h3>Itens:</h3>
+    <ul>
+      <li *ngFor="let item of pedido?.itens">
+        {{ item.quantidade }}x {{ item.produto?.album }} - R$ {{ item.precoUnitario | number:'1.2-2' }}
+      </li>
+    </ul>
+
+    <button class="parallelogram-button pagar" (click)="fecharPopup()">
+      <span>Ir para pagamento</span>
+    </button>
+  </div>
+</div>
