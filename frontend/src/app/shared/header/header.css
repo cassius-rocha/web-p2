@@ -8,15 +8,19 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 0; /* sem espaçamento */
+  padding: 0;
+  /* sem espaçamento */
   box-sizing: border-box;
 }
 
 .header-left {
-  width: 150px; /* espaço fixo para a logo */
+  width: 150px;
+  /* espaço fixo para a logo */
   display: flex;
-  justify-content: center; /* centraliza horizontalmente a logo */
-  align-items: center; /* centraliza verticalmente */
+  justify-content: center;
+  /* centraliza horizontalmente a logo */
+  align-items: center;
+  /* centraliza verticalmente */
 }
 
 .logo-placeholder {
@@ -33,7 +37,8 @@
 .header-center {
   flex-grow: 1;
   display: flex;
-  justify-content: center; /* centraliza a busca */
+  justify-content: center;
+  /* centraliza a busca */
 }
 
 .search-parallelogram {
@@ -61,11 +66,13 @@
 .header-right {
   display: flex;
   gap: 1rem;
-  width: 420px; /* largura total para os 3 botões */
+  width: 420px;
+  /* largura total para os 3 botões */
 }
 
 .parallelogram-button {
-  flex-grow: 1 1 0; /* faz cada botão ocupar espaço igual */
+  flex-grow: 1 1 0;
+  /* faz cada botão ocupar espaço igual */
   min-width: 80px;
   transform: skew(20deg);
   border: none;
@@ -95,19 +102,99 @@
   background-color: #8dadff;
 }
 
+.parallelogram-button.login:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+.parallelogram-button.cadastro:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
 .parallelogram-button.cesta {
   background-color: #85e58a;
+}
+
+.parallelogram-button.cesta:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }
 
 .parallelogram-button.logout {
   background-color: #e57373;
 }
 
+.parallelogram-button.logout:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
 .icon-button {
   background: none;
   border: none;
   cursor: pointer;
-  transform: skew(-20deg); /* desentorta a lupa */
+  transform: skew(-20deg);
+  /* desentorta a lupa */
   font-size: 1.2rem;
   padding: 0 0.5rem;
+}
+
+.logo-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.logo-top {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-bottom: -5px;
+}
+
+.logo-bottom {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Ajuste o header-left para melhor acomodar o logo */
+.header-left {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  /* Adiciona um pequeno espaçamento */
+}
+
+.logo-container:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }

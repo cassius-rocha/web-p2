@@ -10,8 +10,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #85e58a; /* cor igual à do botão "cesta" */
+  background-color: #85e58a;
+  /* cor igual à do botão "cesta" */
   transition: background-color 0.3s, transform 0.2s;
+}
+
+.adicionar:hover {
+  background-color: #74d07b;
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }
 
 /* Conteúdo interno desentortado */
@@ -22,13 +30,8 @@
 
 /* Quando for clicado e já estiver adicionado */
 .adicionar.adicionado {
-  background-color: #85e58a; /* mesma cor, mas pode escurecer se quiser */
+  background-color: #85e58a;
+  /* mesma cor, mas pode escurecer se quiser */
   color: white;
   cursor: default;
-}
-
-/* Efeito de hover */
-.adicionar:hover {
-  background-color: #74d07b;
-  transform: scale(1.05) skew(20deg); /* mantém o skew no hover */
 }

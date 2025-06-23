@@ -1,6 +1,7 @@
 <app-header></app-header>
 
-<div class="cadastro-wrapper">
+<main class="login">
+  <div class="cadastro-wrapper">
   <div class="cadastro-box">
     <form (ngSubmit)="login()" class="formulario-cadastro" novalidate>
       <input
@@ -31,3 +32,5 @@
     <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
   </div>
 </div>
+
+</main>

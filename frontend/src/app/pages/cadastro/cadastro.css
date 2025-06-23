@@ -1,3 +1,13 @@
+.cadastro {
+  background-color: #85e58a; /* Fundo verde */
+  min-height: 100vh;
+}
+
+.login {
+  background-color: #85e58a; /* Fundo verde */
+  min-height: 100vh;
+}
+
 /* Espaço abaixo do header fixo (120px altura) */
 .cadastro-wrapper {
   min-height: calc(100vh - 120px);
@@ -5,14 +15,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  /* Remova o background: #fff; para que o verde apareça */
 }
 
 /* Div principal quadrada, centralizada e SEM skew */
 .cadastro-box {
   width: 360px;
   height: 420px;
-  background: #f9dc9f;
+  background: #f9dc9f; /* Mantém a cor amarela do box */
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
   padding: 2rem;
   display: flex;
@@ -20,6 +30,24 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+}
+
+/* Efeito de hover no box de cadastro */
+.cadastro-box:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Transição suave para o box */
+.cadastro-box {
+  transition: all 0.3s ease;
+}
+
+/* Estilo para os inputs quando focados */
+.parallelogram-input:focus {
+  border-color: #8dadff;
+  box-shadow: 0 0 0 2px rgba(141, 173, 255, 0.3);
 }
 
 /* Form alinhado */
@@ -75,6 +103,9 @@
 
 .parallelogram-button.cadastrar:hover {
   background-color: #738ddf;
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }
 
 /* Mensagem de feedback */

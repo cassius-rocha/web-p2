@@ -15,6 +15,10 @@ export class HeaderComponent {
 
   constructor(private router: Router) { }
 
+  goToVitrine() {
+    this.router.navigate(['/vitrine']);
+  }
+
   buscarProdutos() {
     const termo = this.termoBusca.trim();
     if (termo) {
