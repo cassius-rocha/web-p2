@@ -1,26 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { CestaService } from '../../services/cesta.service';
 import { PedidoService } from '../../services/pedido.service';
-import { PedidoPopupComponent } from '../../pages/pedido-popup/pedido-popup';
 
 @Component({
   selector: 'app-cesta',
   standalone: true,
-  imports: [CommonModule, PedidoPopupComponent],
+  imports: [CommonModule],
   templateUrl: './cesta.html',
   styleUrls: ['./cesta.css']
 })
 export class CestaComponent {
-  mostrarPopup = false;
-  pedidoGerado: any = null;
-
   constructor(
     public cestaService: CestaService,
-    private pedidoService: PedidoService
-  ) {}
+    private pedidoService: PedidoService,
+    private router: Router
+  ) { }
 
-  limparCesta() {
+  limparCesta(): void {
     this.cestaService.limpar();
   }
 
@@ -29,28 +27,40 @@ export class CestaComponent {
       total + item.produto.preco * item.quantidade, 0);
   }
 
-  gravarPedido() {
-    const pedido = {
-      cliente: { id: 1 }, // id fixo ou recuperado do login/autenticação
+  gravarPedido(): void {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+    if (!usuarioLogado) {
+      // Redireciona para login com a URL atual como estado
+      this.router.navigate(['/cadastro-login'], { 
+        state: { 
+          redirectUrl: '/cesta',
+          message: 'Faça login para finalizar seu pedido' 
+        } 
+      });
+      return;
+    }
+
+    const usuario = JSON.parse(usuarioLogado);
+
+    const pedidoDTO = {
+      clienteId: usuario.id,
       itens: this.cestaService.itens.map(item => ({
-        produto: item.produto,
+        produtoId: item.produto.id,
         quantidade: item.quantidade,
         precoUnitario: item.produto.preco
       }))
     };
 
-    this.pedidoService.criarPedido(pedido).subscribe({
+    this.pedidoService.criarPedido(pedidoDTO).subscribe({
       next: (res) => {
-        this.pedidoGerado = res;
-        this.mostrarPopup = true;
-        this.limparCesta();
+        this.cestaService.limpar();
+        this.router.navigate(['/pedido'], { state: { pedido: res } });
       },
-      error: (err) => console.error('Erro ao criar pedido:', err)
+      error: (err) => {
+        console.error('Erro detalhado:', err);
+        alert(`Erro: ${err.error?.message || 'Erro ao gravar pedido'}`);
+      }
     });
-  }
-
-  fecharPopup() {
-    this.mostrarPopup = false;
-    this.pedidoGerado = null;
   }
 }

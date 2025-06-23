@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
@@ -7,7 +8,11 @@ export class PedidoService {
 
   constructor(private http: HttpClient) {}
 
-  criarPedido(pedido: any) {
-    return this.http.post(this.apiUrl, pedido);
+  criarPedido(pedido: any): Observable<any> {
+    return this.http.post(this.apiUrl, pedido, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }

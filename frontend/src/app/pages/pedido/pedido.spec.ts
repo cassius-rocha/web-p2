@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PedidoPopup } from './pedido-popup';
+import { Pedido } from './pedido';
 
-describe('PedidoPopup', () => {
-  let component: PedidoPopup;
-  let fixture: ComponentFixture<PedidoPopup>;
+describe('Pedido', () => {
+  let component: Pedido;
+  let fixture: ComponentFixture<Pedido>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PedidoPopup]
+      imports: [Pedido]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PedidoPopup);
+    fixture = TestBed.createComponent(Pedido);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

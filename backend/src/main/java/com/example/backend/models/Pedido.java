@@ -31,7 +31,7 @@ public class Pedido {
     }
 
     public Pedido(Long id, Cliente cliente, LocalDateTime dataCriacao,
-                  List<ItemPedido> itens, BigDecimal total, LocalDate previsaoEntrega) {
+            List<ItemPedido> itens, BigDecimal total, LocalDate previsaoEntrega) {
         this.id = id;
         this.cliente = cliente;
         this.dataCriacao = dataCriacao;
@@ -40,51 +40,61 @@ public class Pedido {
         this.previsaoEntrega = previsaoEntrega;
     }
 
-    public Long getId() { 
-        return id; 
-    }
-    
-    public void setId(Long id) { 
-        this.id = id; 
-    }
-    
-    public Cliente getCliente() { 
-        return cliente; 
-    }
-    
-    public void setCliente(Cliente cliente) { 
-        this.cliente = cliente; 
-    }
-    
-    public LocalDateTime getDataCriacao() { 
-        return dataCriacao; 
-    }
-    
-    public void setDataCriacao(LocalDateTime dataCriacao) { 
-        this.dataCriacao = dataCriacao; 
-    }
-    
-    public List<ItemPedido> getItens() { 
-        return itens; 
-    }
-    
-    public void setItens(List<ItemPedido> itens) { 
-        this.itens = itens; 
-    }
-    
-    public BigDecimal getTotal() { 
-        return total; 
-    }
-    
-    public void setTotal(BigDecimal total) { 
-        this.total = total; 
+    @PrePersist
+    protected void onCreate() {
+        if (dataCriacao == null) {
+            dataCriacao = LocalDateTime.now();
+        }
+        if (previsaoEntrega == null) {
+            previsaoEntrega = LocalDateTime.now().toLocalDate().plusDays(7);
+        }
     }
 
-    public LocalDate getPrevisaoEntrega() { 
-        return previsaoEntrega; 
+    public Long getId() {
+        return id;
     }
-    
-    public void setPrevisaoEntrega(LocalDate previsaoEntrega) { 
-        this.previsaoEntrega = previsaoEntrega; 
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public LocalDate getPrevisaoEntrega() {
+        return previsaoEntrega;
+    }
+
+    public void setPrevisaoEntrega(LocalDate previsaoEntrega) {
+        this.previsaoEntrega = previsaoEntrega;
     }
 }

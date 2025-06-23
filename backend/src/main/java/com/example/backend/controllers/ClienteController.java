@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.backend.dto.EmailRequest;
 import java.util.List;
 import java.util.Optional;
-import com.example.backend.service.ClienteService;
 
 @RestController
 @RequestMapping("/api/clientes")

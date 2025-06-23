@@ -1,0 +1,57 @@
+<main class="pedido-container" *ngIf="pedido; else erro">
+    <h2>Pedido realizado com sucesso!</h2>
+
+    <section class="cliente-info">
+        <h3>Dados do Cliente</h3>
+        <p><strong>Nome:</strong> {{ pedido.cliente.nome }}</p>
+        <p><strong>Email:</strong> {{ pedido.cliente.email }}</p>
+    </section>
+
+    <section class="pedido-info">
+        <h3>Dados do Pedido</h3>
+        <p><strong>Código do pedido:</strong> {{ pedido.id }}</p>
+        <p><strong>Previsão de entrega:</strong> {{ pedido.previsaoEntrega | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Data do pedido:</strong> {{ pedido.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
+    </section>
+
+    <section class="itens-info">
+        <h3>Itens do Pedido</h3>
+        <div class="tabela">
+            <div class="cabecalho">
+                <div class="coluna-item">Item</div>
+                <div class="coluna-quantidade">Quantidade</div>
+                <div class="coluna-valor">Valor</div>
+            </div>
+
+            <div *ngFor="let item of pedido.itens" class="linha">
+                <div class="coluna-item">
+                    <div class="vinil-imagem">
+                        <img class="vinil-cesta-img" [src]="'assets/vinis/' + item.vinil.id + '.jpg'" 
+                             [alt]="item.vinil.album" />
+                    </div>
+                    <strong>{{ item.vinil.album }}</strong><br />
+                    {{ item.vinil.artista }}<br />
+                    {{ item.vinil.ano }}<br />
+                    Gravadora: {{ item.vinil.gravadora }}<br />
+                    Gênero: {{ item.vinil.genero }}<br />
+                    Descrição: {{ item.vinil.descricao }}<br />
+                    Preço unitário: R$ {{ item.precoUnitario | number:'1.2-2' }}
+                </div>
+                <div class="coluna-quantidade">{{ item.quantidade }}</div>
+                <div class="coluna-valor">
+                    R$ {{ (item.precoUnitario * item.quantidade) | number:'1.2-2' }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="total">
+        <strong>Total:</strong> R$ {{ pedido.total | number:'1.2-2' }}
+    </div>
+
+    <button class="botao-pagamento" (click)="irParaPagamento()">Ir para o pagamento</button>
+</main>
+
+<ng-template #erro>
+    <p>Erro ao carregar o pedido.</p>
+</ng-template>

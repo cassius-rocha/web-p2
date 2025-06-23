@@ -1,13 +1,23 @@
 package com.example.backend.controllers;
 
+import com.example.backend.dto.ItemPedidoDTO;
+import com.example.backend.dto.PedidoDTO;
+import com.example.backend.models.Cliente;
+import com.example.backend.models.ItemPedido;
 import com.example.backend.models.Pedido;
+import com.example.backend.models.Vinil;
+import com.example.backend.repository.ClienteRepository;
 import com.example.backend.repository.PedidoRepository;
+import com.example.backend.repository.VinilRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +27,10 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private VinilRepository vinilRepository;
 
     // GET /api/pedidos - listar todos
     @GetMapping
@@ -29,33 +43,60 @@ public class PedidoController {
     public ResponseEntity<Pedido> getPedidoById(@PathVariable Long id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
         return pedido.map(ResponseEntity::ok)
-                     .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // POST /api/pedidos - criar pedido com itens
     @PostMapping
-    public Pedido createPedido(@RequestBody Pedido pedido) {
-        // Define data de criação se não fornecida
-        if (pedido.getDataCriacao() == null) {
+    public ResponseEntity<?> createPedido(@RequestBody PedidoDTO pedidoDTO) {
+        try {
+            // 1. Buscar o cliente
+            Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+            // 2. Criar o pedido
+            Pedido pedido = new Pedido();
+            pedido.setCliente(cliente);
             pedido.setDataCriacao(LocalDateTime.now());
-        }
+            pedido.setPrevisaoEntrega(LocalDateTime.now().toLocalDate().plusDays(7));
 
-        if (pedido.getPrevisaoEntrega() == null) {
-            pedido.setPrevisaoEntrega(pedido.getDataCriacao().toLocalDate().plusDays(7));
-        }
+            // 3. Processar itens
+            List<ItemPedido> itens = new ArrayList<>();
+            BigDecimal total = BigDecimal.ZERO;
 
-        // Calcula total se não fornecido
-        if (pedido.getTotal() == null) {
-            BigDecimal total = pedido.getItens().stream()
-                .map(item -> item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
+                Vinil vinil = vinilRepository.findById(itemDTO.getProdutoId())
+                        .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + itemDTO.getProdutoId()));
+
+                ItemPedido item = new ItemPedido();
+                item.setVinil(vinil);
+                item.setQuantidade(itemDTO.getQuantidade());
+                item.setPrecoUnitario(itemDTO.getPrecoUnitario());
+                item.setPedido(pedido);
+
+                itens.add(item);
+                total = total.add(itemDTO.getPrecoUnitario()
+                        .multiply(BigDecimal.valueOf(itemDTO.getQuantidade())));
+            }
+
+            pedido.setItens(itens);
             pedido.setTotal(total);
+
+            // 4. Salvar e retornar o pedido com todas as informações necessárias
+            Pedido pedidoSalvo = pedidoRepository.save(pedido);
+            
+            // Carrega explicitamente os relacionamentos necessários
+            pedidoSalvo.getCliente().getId(); // Garante que o cliente está carregado
+            pedidoSalvo.getItens().forEach(item -> {
+                item.getVinil().getId(); // Garante que os vinis estão carregados
+            });
+            
+            return ResponseEntity.ok(pedidoSalvo);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao criar pedido: " + e.getMessage());
         }
-
-        // Garantir que cada item tenha referência para o pedido (essencial para cascade funcionar)
-        pedido.getItens().forEach(item -> item.setPedido(pedido));
-
-        return pedidoRepository.save(pedido);
     }
 
     // PUT /api/pedidos/{id} - atualizar pedido e seus itens
@@ -75,11 +116,17 @@ public class PedidoController {
 
             // Atualiza total
             BigDecimal total = pedido.getItens().stream()
-                .map(item -> item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                    .map(item -> item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
             pedido.setTotal(total);
 
-            return ResponseEntity.ok(pedidoRepository.save(pedido));
+            Pedido pedidoAtualizado = pedidoRepository.save(pedido);
+            
+            // Carrega explicitamente os relacionamentos necessários
+            pedidoAtualizado.getCliente().getId();
+            pedidoAtualizado.getItens().forEach(item -> item.getVinil().getId());
+            
+            return ResponseEntity.ok(pedidoAtualizado);
         } else {
             return ResponseEntity.notFound().build();
         }

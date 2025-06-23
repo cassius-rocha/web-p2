@@ -16,8 +16,26 @@ export class LoginComponent {
   email = '';
   senha = '';
   mensagem = '';
+  redirectUrl = '/vitrine'; // Valor padrão
 
   constructor(private clienteService: ClienteService, private router: Router) { }
+
+  ngOnInit() {
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras?.state as {
+      redirectUrl: string,
+      message?: string
+    };
+
+    if (state) {
+      if (state.redirectUrl) {
+        this.redirectUrl = state.redirectUrl;
+      }
+      if (state.message) {
+        this.mensagem = state.message;
+      }
+    }
+  }
 
   login() {
     this.mensagem = '';
@@ -31,8 +49,7 @@ export class LoginComponent {
       next: (res) => {
         if (res && res.id) {
           localStorage.setItem('usuarioLogado', JSON.stringify(res));
-          this.mensagem = '';
-          this.router.navigate(['/vitrine']);
+          this.router.navigate([this.redirectUrl]);
         } else {
           this.mensagem = 'Usuário ou senha inválidos.';
         }
@@ -59,7 +76,7 @@ export class LoginComponent {
         if (err.status === 404) {
           this.mensagem = 'E-mail não cadastrado, vá para a página de cadastro.';
         } else if (err.error && typeof err.error === 'string') {
-          this.mensagem = err.error; 
+          this.mensagem = err.error;
         } else {
           this.mensagem = 'Erro ao tentar redefinir senha.';
         }
