@@ -50,13 +50,11 @@ public class ClienteController {
         }
     }
 
-    // GET /api/clientes - listar todos
     @GetMapping
     public List<Cliente> getAllClientes() {
         return clienteRepository.findAll();
     }
 
-    // GET /api/clientes/{id} - buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -64,7 +62,6 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST /api/clientes - criar novo cliente
     @PostMapping
     public ResponseEntity<?> createCliente(@RequestBody Cliente cliente) {
         try {
@@ -92,7 +89,6 @@ public class ClienteController {
         }
     }
 
-    // PUT /api/clientes/{id} - atualizar cliente
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody Cliente clienteDetails) {
         Optional<Cliente> optionalCliente = clienteRepository.findById(id);
@@ -109,7 +105,6 @@ public class ClienteController {
         }
     }
 
-    // DELETE /api/clientes/{id} - deletar cliente
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
         if (clienteRepository.existsById(id)) {

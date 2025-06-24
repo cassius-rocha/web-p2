@@ -32,13 +32,11 @@ public class PedidoController {
     @Autowired
     private VinilRepository vinilRepository;
 
-    // GET /api/pedidos - listar todos
     @GetMapping
     public List<Pedido> getAllPedidos() {
         return pedidoRepository.findAll();
     }
 
-    // GET /api/pedidos/{id} - buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> getPedidoById(@PathVariable Long id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
@@ -46,21 +44,17 @@ public class PedidoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST /api/pedidos - criar pedido com itens
     @PostMapping
     public ResponseEntity<?> createPedido(@RequestBody PedidoDTO pedidoDTO) {
         try {
-            // 1. Buscar o cliente
             Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())
                     .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-            // 2. Criar o pedido
             Pedido pedido = new Pedido();
             pedido.setCliente(cliente);
             pedido.setDataCriacao(LocalDateTime.now());
             pedido.setPrevisaoEntrega(LocalDateTime.now().toLocalDate().plusDays(7));
 
-            // 3. Processar itens
             List<ItemPedido> itens = new ArrayList<>();
             BigDecimal total = BigDecimal.ZERO;
 
@@ -82,10 +76,8 @@ public class PedidoController {
             pedido.setItens(itens);
             pedido.setTotal(total);
 
-            // 4. Salvar e retornar o pedido com todas as informações necessárias
             Pedido pedidoSalvo = pedidoRepository.save(pedido);
             
-            // Carrega explicitamente os relacionamentos necessários
             pedidoSalvo.getCliente().getId(); // Garante que o cliente está carregado
             pedidoSalvo.getItens().forEach(item -> {
                 item.getVinil().getId(); // Garante que os vinis estão carregados
@@ -99,7 +91,6 @@ public class PedidoController {
         }
     }
 
-    // PUT /api/pedidos/{id} - atualizar pedido e seus itens
     @PutMapping("/{id}")
     public ResponseEntity<Pedido> updatePedido(@PathVariable Long id, @RequestBody Pedido pedidoDetails) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(id);
@@ -132,7 +123,6 @@ public class PedidoController {
         }
     }
 
-    // DELETE /api/pedidos/{id} - deletar pedido
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePedido(@PathVariable Long id) {
         if (pedidoRepository.existsById(id)) {

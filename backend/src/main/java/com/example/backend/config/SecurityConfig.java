@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/**", "/vinil/**").permitAll()
                 .anyRequest().permitAll()
             )
-            .formLogin(form -> form.disable()); // Desativa o login padrão com HTML
+            .formLogin(form -> form.disable()); 
 
         return http.build();
     }

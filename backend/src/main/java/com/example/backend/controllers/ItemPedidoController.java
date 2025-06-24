@@ -16,13 +16,11 @@ public class ItemPedidoController {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
-    // GET /api/itens-pedido - listar todos os itens
     @GetMapping
     public List<ItemPedido> getAllItensPedido() {
         return itemPedidoRepository.findAll();
     }
 
-    // GET /api/itens-pedido/{id} - buscar item por ID
     @GetMapping("/{id}")
     public ResponseEntity<ItemPedido> getItemPedidoById(@PathVariable Long id) {
         Optional<ItemPedido> item = itemPedidoRepository.findById(id);
@@ -30,13 +28,11 @@ public class ItemPedidoController {
                    .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST /api/itens-pedido - criar novo item
     @PostMapping
     public ItemPedido createItemPedido(@RequestBody ItemPedido itemPedido) {
         return itemPedidoRepository.save(itemPedido);
     }
 
-    // PUT /api/itens-pedido/{id} - atualizar item
     @PutMapping("/{id}")
     public ResponseEntity<ItemPedido> updateItemPedido(@PathVariable Long id, @RequestBody ItemPedido itemDetails) {
         Optional<ItemPedido> optionalItem = itemPedidoRepository.findById(id);
@@ -54,7 +50,6 @@ public class ItemPedidoController {
         }
     }
 
-    // DELETE /api/itens-pedido/{id} - deletar item
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItemPedido(@PathVariable Long id) {
         if (itemPedidoRepository.existsById(id)) {
