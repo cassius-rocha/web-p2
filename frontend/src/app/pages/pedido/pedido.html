@@ -26,8 +26,8 @@
             <div *ngFor="let item of pedido.itens" class="linha">
                 <div class="coluna-item">
                     <div class="vinil-imagem">
-                        <img class="vinil-cesta-img" [src]="'assets/vinis/' + item.vinil.id + '.jpg'" 
-                             [alt]="item.vinil.album" />
+                        <img class="vinil-cesta-img" [src]="'assets/vinis/' + item.vinil.id + '.jpg'"
+                            [alt]="item.vinil.album" />
                     </div>
                     <strong>{{ item.vinil.album }}</strong><br />
                     {{ item.vinil.artista }}<br />
@@ -45,9 +45,12 @@
         </div>
     </section>
 
-    <div class="total">
-        <strong>Total:</strong> R$ {{ pedido.total | number:'1.2-2' }}
+    <div class="total linha">
+        <div class="coluna-item"></div>
+        <div class="coluna-quantidade"><strong>Total:</strong></div>
+        <div class="coluna-valor">R$ {{ pedido.total | number:'1.2-2' }}</div>
     </div>
+
 
     <button class="botao-pagamento" (click)="irParaPagamento()">Ir para o pagamento</button>
 </main>

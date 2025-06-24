@@ -1,6 +1,6 @@
 .pedido-container {
     padding: 140px 2rem 2rem;
-    background-color: #fefefe;
+    background-color: #AFEFF9;
     min-height: 100vh;
 }
 
@@ -12,7 +12,6 @@ section {
     margin-bottom: 1.5rem;
     padding: 1rem;
     background-color: #f8f9fa;
-    border-radius: 5px;
 }
 
 .pedido-info p {
@@ -32,7 +31,6 @@ section {
     gap: 1rem;
     padding: 0.5rem;
     background-color: #f4f4f4;
-    border-radius: 5px;
 }
 
 .coluna-item {
@@ -45,9 +43,15 @@ section {
 }
 
 .total {
-    font-size: 1.2rem;
-    text-align: right;
-    margin: 1.5rem 0;
+  font-size: 1.2rem;
+  text-align: right;
+  padding: 0.5rem;
+  background-color: #f4f4f4;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .botao-pagamento {
@@ -68,6 +72,5 @@ section {
 .vinil-cesta-img {
     width: 100px;
     height: auto;
-    border-radius: 4px;
     object-fit: cover;
 }

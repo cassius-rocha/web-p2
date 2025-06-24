@@ -28,10 +28,12 @@
       </div>
     </div>
 
-    <div class="total">
-      <span>Total:</span>
-      <strong>R$ {{ calcularTotal() | number:'1.2-2' }}</strong>
+    <div class="total linha">
+      <div class="coluna-item"></div>
+      <div class="coluna-quantidade"><strong>Total:</strong></div>
+      <div class="coluna-valor"><strong>R$ {{ calcularTotal() | number:'1.2-2' }}</strong></div>
     </div>
+
 
     <div class="botoes">
       <button class="parallelogram-button limpar" (click)="limparCesta()">

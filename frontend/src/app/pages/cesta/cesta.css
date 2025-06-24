@@ -1,6 +1,6 @@
 .cesta-container {
   padding: 140px 2rem 2rem;
-  background-color: #fffdf0;
+  background-color: #8dadff;
   min-height: 100vh;
 }
 
@@ -21,7 +21,6 @@ h2 {
   gap: 1rem;
   padding: 0.5rem;
   background-color: #f4f4f4;
-  border-radius: 5px;
 }
 
 .coluna-item {
@@ -34,9 +33,12 @@ h2 {
 }
 
 .total {
-  text-align: right;
+  background-color: #f4f4f4;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 1rem;
   font-size: 1.2rem;
-  margin-top: 1rem;
 }
 
 .botoes {
@@ -86,6 +88,5 @@ h2 {
   height: auto;
   display: block;
   margin-bottom: 0.5rem;
-  border-radius: 4px;     /* opcional, para suavizar a borda */
   object-fit: cover;      /* mantém proporção, sem distorção */
 }
