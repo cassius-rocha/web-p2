@@ -1,4 +1,3 @@
-// src/main/java/com/example/backend/dto/EmailRequest.java
 package com.example.backend.dto;
 
 public class EmailRequest {
